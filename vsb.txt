@@ -1,0 +1,24 @@
+% Define the parameters of the signal
+carrier_frequency = 1000; % carrier frequency in Hz
+modulation_index = 0.5; % modulation index
+modulating_frequency = 100; % modulating frequency in Hz
+sampling_frequency = 10000; % sampling frequency in Hz
+time = 0:1/sampling_frequency:1; % time vector
+
+% Generate the carrier signal
+carrier_signal = cos(2*pi*carrier_frequency*time);
+
+% Generate the modulating signal
+modulating_signal = cos(2*pi*modulating_frequency*time);
+
+% Generate the DSB-AM signal
+DSB_AM_signal = (1 + modulation_index*modulating_signal).*carrier_signal;
+
+% Generate the VSB-AM signal
+VSB_AM_signal = filter(ones(1,11)/11,1,DSB_AM_signal);
+
+% Plot the signals
+plot(time, VSB_AM_signal, 'b');
+legend('VSB-AM');
+xlabel('Time (s)');
+ylabel('Amplitude');
