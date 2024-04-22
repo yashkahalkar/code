@@ -1,0 +1,23 @@
+% Define the two sequences
+x = [1, 2, 3]; % Replace with your first sequence
+h = [4, 5, 6]; % Replace with your second sequence
+
+% Ensure the sequences are of the same length for circular convolution
+N = max(length(x), length(h));
+x = [x zeros(1, N-length(x))];
+h = [h zeros(1, N-length(h))];
+
+% Initialize the result to zeros with the same length as the sequences
+y = zeros(1, N);
+
+% Perform the circular convolution operation
+for n = 1:N
+    for m = 1:N
+        index = mod(n-m, N) + 1; % Circular index
+        y(n) = y(n) + x(m) * h(index);
+    end
+end
+
+% Display the result
+disp('The circular convolution of the two sequences is:');
+disp(y);

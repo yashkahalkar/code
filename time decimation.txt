@@ -1,0 +1,38 @@
+function X = fft_time_decimation(x)
+    N = length(x);
+    if N <= 1
+        X = x;
+        return;
+    end
+    
+    % Divide step: separate the signal into even and odd elements
+    x_even = fft_time_decimation(x(1:2:end));
+    x_odd = fft_time_decimation(x(2:2:end));
+    
+    % Combine step: use the DFT properties to combine the results
+    factor = exp(-2 * pi * 1i * (0:N/2-1)/N);
+    X = [x_even + factor .* x_odd, x_even - factor .* x_odd];
+end
+
+% Example usage:
+x = [1, 2, 3, 4]; % Replace with your signal
+X = fft_time_decimation(x);
+
+% Plot the result
+N = length(X);
+f = (0:N-1) * (1/N);
+magnitude = abs(X);
+phase = angle(X);
+
+figure;
+subplot(2,1,1);
+stem(f, magnitude);
+title('Magnitude of the DFT');
+xlabel('Normalized Frequency');
+ylabel('Magnitude');
+
+subplot(2,1,2);
+stem(f, phase);
+title('Phase of the DFT');
+xlabel('Normalized Frequency');
+ylabel('Phase (radians)');

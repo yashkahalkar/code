@@ -1,0 +1,19 @@
+% Define the frequency domain signal (DFT coefficients)
+X = [1, 2, 3, 4]; % Replace with your actual DFT coefficients
+
+% Calculate the IDFT of the signal
+N = length(X); % Number of DFT points
+x = zeros(1, N); % Initialize IDFT output array
+
+% IDFT computation
+for n = 1:N
+    for k = 1:N
+        x(n) = x(n) + (1/N) * X(k) * exp(1i * 2 * pi * (k-1) * (n-1) / N);
+    end
+end
+
+% Plot the real part of the IDFT result
+stem(0:N-1, real(x)); % Only the real part is plotted
+title('IDFT of the signal');
+xlabel('Time index n');
+ylabel('Amplitude');

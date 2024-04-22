@@ -1,0 +1,32 @@
+% Define a discrete-time signal
+x = [1, 2, 3, 4]; % Replace with your actual signal values
+
+% Calculate the energy in the time domain
+time_domain_energy = sum(abs(x).^2);
+
+% Compute the DFT of the signal
+X = fft(x);
+
+% Calculate the energy in the frequency domain
+frequency_domain_energy = sum(abs(X).^2) / length(X);
+
+% Display the results
+disp(['Energy in the time domain: ', num2str(time_domain_energy)]);
+disp(['Energy in the frequency domain: ', num2str(frequency_domain_energy)]);
+
+% Plot the signal and its DFT magnitude
+subplot(2, 1, 1);
+stem(0:length(x)-1, x);
+title('Discrete-Time Signal');
+xlabel('Sample');
+ylabel('Amplitude');
+
+subplot(2, 1, 2);
+stem(0:length(X)-1, abs(X));
+title('Magnitude of DFT');
+xlabel('Frequency Index');
+ylabel('|X(k)|');
+
+% Verify Parseval's theorem
+assert(abs(time_domain_energy - frequency_domain_energy) < 1e-10, ...
+       'Parseval''s theorem is not verified');

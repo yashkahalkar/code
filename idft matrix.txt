@@ -1,0 +1,17 @@
+% Prompt the user for input signal in frequency domain
+X = input('Enter the frequency domain signal X[k]: ');
+
+% Length of the signal
+N = length(X);
+
+% Generate the IDFT matrix
+n = 0:N-1; % Time index
+k = n'; % Frequency index
+W = exp(2*pi*1i/N).^(k*n); % IDFT matrix
+
+% Calculate the IDFT
+x_n = real(W'*X)/N;
+
+% Display the time domain signal
+disp('The time domain signal x[n] is:');
+disp(x_n);

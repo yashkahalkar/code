@@ -1,0 +1,17 @@
+% Define the signal
+x = [1, 2, 3, 4]; % Example signal
+
+% Length of the signal
+N = length(x);
+
+% Generate the DFT matrix
+n = 0:N-1; % Time index
+k = n'; % Frequency index
+W = exp(-2 * pi * 1i / N) .^ (k * n);
+
+% Compute the DFT
+X = W * x';
+
+% Display the result
+disp('DFT of the signal:');
+disp(X);

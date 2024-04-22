@@ -1,0 +1,26 @@
+% Define the discrete-time signal
+x = [1, 2, 3, 4]; % Replace with your actual signal values
+
+% Calculate the DFT of the signal
+N = length(x); % Length of the signal
+X = zeros(1, N); % Initialize DFT output array
+
+% DFT computation
+for k = 1:N
+    for n = 1:N
+        X(k) = X(k) + x(n) * exp(-1i * 2 * pi * (k-1) * (n-1) / N);
+    end
+end
+
+% Plot the magnitude and phase of the DFT
+subplot(2, 1, 1);
+stem(0:N-1, abs(X)); % Magnitude plot
+title('Magnitude of DFT');
+xlabel('Frequency index k');
+ylabel('|X(k)|');
+
+subplot(2, 1, 2);
+stem(0:N-1, angle(X)); % Phase plot
+title('Phase of DFT');
+xlabel('Frequency index k');
+ylabel('Phase of X(k) in radians');

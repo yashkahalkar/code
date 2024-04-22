@@ -1,0 +1,30 @@
+% Define the signal
+x = input('Enter the time domain signal x[n]: ');
+
+% Length of the signal
+N = length(x);
+
+% Initialize the DFT output array
+X = zeros(1, N);
+
+% Frequency decimation FFT algorithm (DIF FFT)
+for k = 1:N
+    X(k) = 0;
+    for n = 1:N
+        X(k) = X(k) + x(n) * exp(-1i * 2 * pi * (k-1) * (n-1) / N);
+    end
+end
+
+% Plot the magnitude and phase of the DFT
+figure;
+subplot(2,1,1);
+stem(0:N-1, abs(X));
+title('Magnitude of DFT');
+xlabel('Frequency index k');
+ylabel('|X(k)|');
+
+subplot(2,1,2);
+stem(0:N-1, angle(X));
+title('Phase of DFT');
+xlabel('Frequency index k');
+ylabel('Phase of X(k) [radians]');

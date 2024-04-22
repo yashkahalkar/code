@@ -1,0 +1,27 @@
+% Define the sequence parameters
+n = 0:100; % Time index from 0 to 100
+x = (-0.9).^n; % The sequence (-0.9)^n
+
+% Define the frequency range for DTFT
+omega = linspace(-pi, pi, 1024); % Frequency range from -pi to pi
+
+% Initialize the DTFT result
+X = zeros(1, length(omega));
+
+% Compute the DTFT
+for k = 1:length(omega)
+    X(k) = sum(x .* exp(-1i * omega(k) * n));
+end
+
+% Plot the magnitude and phase of the DTFT
+subplot(2, 1, 1);
+plot(omega, abs(X));
+title('Magnitude of DTFT of (-0.9)^n');
+xlabel('Frequency (\omega)');
+ylabel('|X(\omega)|');
+
+subplot(2, 1, 2);
+plot(omega, angle(X));
+title('Phase of DTFT of (-0.9)^n');
+xlabel('Frequency (\omega)');
+ylabel('Phase of X(\omega)');

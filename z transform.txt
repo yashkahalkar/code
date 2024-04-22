@@ -1,0 +1,24 @@
+% Define the range of x
+x = 0:20; % You can adjust the range as needed
+
+% Define the signal
+signal = 2.^x;
+
+% Define the grid over the complex plane
+[Re, Im] = meshgrid(linspace(-3, 3, 100), linspace(-3, 3, 100));
+Z_plane = Re + 1i * Im;
+
+% Compute the Z-transform of the signal over the grid
+Z_transform = zeros(size(Z_plane));
+for n = x
+    Z_transform = Z_transform + signal(n+1) * Z_plane.^(-n);
+end
+
+% Plot the surface
+figure;
+surf(Re, Im, abs(Z_transform));
+title('Surface plot of the Magnitude of the Z-transform of 2^x');
+xlabel('Real Part');
+ylabel('Imaginary Part');
+zlabel('Magnitude');
+shading interp; % Interpolate the shading of the surface
