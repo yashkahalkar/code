@@ -1,0 +1,21 @@
+clear all;
+close all;
+clc;
+
+t=-100:0.1:100;
+fm=0.05;
+x=cos(2*pi*fm*t);
+subplot(2,2,1);
+plot(t,x);
+title("continuous time signal");
+
+%under sampling
+fs1=0.01;
+n1=-10:10;
+x1=cos(2*pi*fm*n1/fs1);
+subplot(2,2,2);
+stem(n1,x1);
+hold on;
+subplot(2,2,2);
+plot(n1,x1,':');
+title("Under sampled signal");
